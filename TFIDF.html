@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Topik Modelling Using LSA &#8212; UAS PPW 190411100015 Moh. Wildan Fathoni</title>
+    <title>Prepocessing Data &#8212; UAS PPW 190411100015 Moh. Wildan Fathoni</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Topik Modelling Using LSA pada data abstrak ekonomi-manajemen" href="Topik%20Modeling%20LSA%202.html" />
+    <link rel="next" title="Analisis K-means Clustering data abstrak PTA ekonomi-management" href="k-means-clustering.html" />
+    <link rel="prev" title="Crawling Abstrak Website PTA ekonomi-manajemen" href="Crawler.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,8 +119,8 @@ const thebe_selector_output = ".output, .cell_output"
    Crawling Abstrak Website PTA ekonomi-manajemen
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="TFIDF.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Prepocessing Data
   </a>
  </li>
@@ -133,8 +134,8 @@ const thebe_selector_output = ".output, .cell_output"
    Topik Modelling Using LSA pada data abstrak  ekonomi-manajemen
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Topik%20Modeling%20LSA.html">
    Topik Modelling Using LSA
   </a>
  </li>
@@ -197,7 +198,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Topik Modeling LSA.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/TFIDF.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -257,7 +258,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTopik Modeling LSA.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTFIDF.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -285,7 +286,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/Topik Modeling LSA.ipynb"
+        <a href="_sources/TFIDF.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -355,13 +356,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#extract-bag-of-words-bow">
-   3. Extract Bag of Words (BoW)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#topik-modelling-lsa">
-   4. Topik Modelling LSA
+  <a class="reference internal nav-link" href="#tf-idf">
+   3. TF-IDF
   </a>
  </li>
 </ul>
@@ -373,7 +369,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Topik Modelling Using LSA</h1>
+                <h1>Prepocessing Data</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -394,13 +390,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#extract-bag-of-words-bow">
-   3. Extract Bag of Words (BoW)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#topik-modelling-lsa">
-   4. Topik Modelling LSA
+  <a class="reference internal nav-link" href="#tf-idf">
+   3. TF-IDF
   </a>
  </li>
 </ul>
@@ -413,16 +404,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="topik-modelling-using-lsa">
-<h1>Topik Modelling Using LSA<a class="headerlink" href="#topik-modelling-using-lsa" title="Permalink to this headline">#</a></h1>
-<p>Latent Semantic Analysis atau LSA, adalah salah satu teknik dasar dalam pemodelan topik. Ide intinya adalah untuk mengambil matriks dari apa yang kita miliki dokumen dan istilah dan menguraikannya menjadi matriks topik-dokumen yang terpisah dan matriks topik-istilah.</p>
-<p>Langkah-langkah untuk proses LSA yatu:</p>
-<ol class="simple">
-<li><p>Preprocessing</p></li>
-<li><p>Tokenisasi dan Stopword</p></li>
-<li><p>Extract Bag of Words (BoW)</p></li>
-<li><p>Topik Modelling LSA</p></li>
-</ol>
+  <section class="tex2jax_ignore mathjax_ignore" id="prepocessing-data">
+<h1>Prepocessing Data<a class="headerlink" href="#prepocessing-data" title="Permalink to this headline">#</a></h1>
 <section id="preprocessing">
 <h2>1. Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h2>
 <h3>Import Library</h3><p>Memasukkan librari pandas untuk menampilkan data</p>
@@ -437,8 +420,8 @@ title="Print to PDF"
 <p>Membuat variabel df untuk menampilkan data abstrak yang sudah di crawler dari Portal Tugas Akademik</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data\data_abstrak.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data\data.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -462,92 +445,121 @@ title="Print to PDF"
     <tr style="text-align: right;">
       <th></th>
       <th>Judul</th>
-      <th>Penulis</th>
+      <th>Mahasiswa</th>
       <th>Dosbing_1</th>
       <th>Dosbing_2</th>
       <th>Abstrak_indo</th>
+      <th>Abstract_english</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>APLIKASI DAN DESAIN MODEL DECISION AID PELANGG...</td>
-      <td>Ardiyanto Setiawan</td>
-      <td>Moch. Kautsar Sophan, S.Kom., M.MT.</td>
-      <td>eni Kustiyah Ningsih, S.Kom., M.Kom.</td>
-      <td>Toko Batik Tulis Madura merupakan salah satu t...</td>
+      <td>Analisis Inovasi Dan Keunggulan Bersaing \r\nD...</td>
+      <td>Penulis : Sandy Ardiansyah</td>
+      <td>Dosen Pembimbing I : Dr. Ir. Nurita Andriani, MM.</td>
+      <td>Dosen Pembimbing II :Suyono, S.E., M. S. M.</td>
+      <td>ABSTRAK\r\n\tTujuan penelitian ini adalah mend...</td>
+      <td>ABSTRACT\r\nThe purpose of this study is to de...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>ANALISA DATA ANTARAN POS EXPRESS MENGGUNAKAN\r...</td>
-      <td>siti murtasiyah warda</td>
-      <td>Bain Khusnul Khotimah.,S.T.,M.Kom</td>
-      <td>irli Irhamni, S.T., M.Kom.</td>
-      <td>PT. Pos Indonesia (Persero) merupakan salah sa...</td>
+      <td>Pengaruh Bauran Pemasaran Terhadap Keputusan P...</td>
+      <td>Penulis : Mahrus Saleh</td>
+      <td>Dosen Pembimbing I : Dr.H Pribanus Wantara, Dr...</td>
+      <td>Dosen Pembimbing II :Hadi Purnomo, SE., MM</td>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+      <td>Object this research is consumer product of XL...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Model Penjualan Produk Unggulan Batik Khas Pam...</td>
-      <td>Murni Rotifah</td>
-      <td>Moch. Kautsar Sophan, S.Kom, M.MT</td>
-      <td>ain Khusnul Khotimah, S.T., M.Kom</td>
-      <td>Kabupaten Pamekasan merupakan salah satu pusat...</td>
+      <td>ANALISIS PORTOFOLIO YANG OPTIMAL DI BEI DENGAN...</td>
+      <td>Penulis : Mira Dwiastuti</td>
+      <td>Dosen Pembimbing I : Hj Evaliati Amaniyah, S.E...</td>
+      <td>Dosen Pembimbing II :Echsan Gani, S.E, M.Si</td>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+      <td>An investment decision is always associated wi...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>PENERAPAN METODE ANALYTICAL HIERARCHY PROCESS ...</td>
-      <td>Helyatin</td>
-      <td>Bain Khusnul K, S.T.,M.Kom</td>
-      <td>ndharini Dwi C, S.Kom.,M.Kom</td>
-      <td>Pemilihan  supplier merupakan salah satu isu p...</td>
+      <td>PENGARUH KOMPETENSI DOSEN TERHADAP KINERJA DOS...</td>
+      <td>Penulis : Aththaariq</td>
+      <td>Dosen Pembimbing I : Dr.RM Moch Wispandono,.S....</td>
+      <td>Dosen Pembimbing II :Dr. Muhammad Alkirom Wild...</td>
+      <td>Abstrak\r\n\r\nAththaariq, Pengaruh Kompetensi...</td>
+      <td>Abstract\r\n\r\nThis study is aimed to analyze...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>PENGELOMPOKAN KUALITAS KELAS PADA SISWA MENGGU...</td>
-      <td>Hamiyah</td>
-      <td>Bain Khusnul K,ST.,M.Kom</td>
-      <td>irli Irhamni, ST, M. Kom</td>
-      <td>ABSTRAK\r\nData yang terdapat pada SMA Wachid ...</td>
+      <td>PENGARUH FAKTOR-FAKTOR PELATIHAN DAN PENGEMBAN...</td>
+      <td>Penulis : SATIYAH</td>
+      <td>Dosen Pembimbing I : Dra. Hj. S. Anugrahini Ir...</td>
+      <td>Dosen Pembimbing II :Helmi Buyung Aulia,S,ST.S...</td>
+      <td>ABSTRAK\r\...</td>
+      <td>ABSTRACT...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN KARYAWAN ...</td>
-      <td>Catur Ngesti Waluyo</td>
-      <td>Mula'ab,S.Si.,M.Kom</td>
-      <td>iza Alfita, S.T., M.T</td>
-      <td>Sumber daya manusia mutlak dibutuhkan untuk ke...</td>
+      <td>analisis faktor-faktor yang berpengaruh terhad...</td>
+      <td>Penulis : Jailani</td>
+      <td>Dosen Pembimbing I : Hj. Evaliati amaniyah, SE...</td>
+      <td>Dosen Pembimbing II :Purnamawati, SE., M.Si</td>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>ABSTRACT\r\nThe objective of this research was...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Deteksi Manusia Menggunakan Histogram of Orien...</td>
-      <td>R.A. Uluwiyah Nur Oktavianis</td>
-      <td>Dr. Indah Agustien, S.Kom., M.Kom</td>
-      <td>ri Kusumaningsih, S.T, M.T</td>
-      <td>Deteksi manusia merupakan  suatu aplikasi yang...</td>
+      <td>Pengaruh Kompensasi Terhadap Kinerja Karywan p...</td>
+      <td>Penulis : agustin pratiwi</td>
+      <td>Dosen Pembimbing I : Drs.Ec. Mudji Kuswinarno....</td>
+      <td>Dosen Pembimbing II :Faidal. S.E, MM.</td>
+      <td>ABSTRAK \r\n\r\n\tTujuan penelitian ini adalah...</td>
+      <td>ABSTRACT\r\n\r\n         The purpose of this s...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>KLASIFIKASI STATUS GIZI BALITA MENGGUNAKAN KOH...</td>
-      <td>Uhty Zunairoh</td>
-      <td>Bain Khusnul Khotimah, S.T., M.Kom.</td>
-      <td>eri Rachmad, S.T., M.T.</td>
-      <td>Aplikasi klasifikasi status gizi balita ini di...</td>
+      <td>PENGARUH STRUKTUR MODAL DAN LIKUIDITAS TERHADA...</td>
+      <td>Penulis : AHMAD ZAINI ALI</td>
+      <td>Dosen Pembimbing I : R. GATOT HERU PRANJOTO, S...</td>
+      <td>Dosen Pembimbing II :PURNAMAWATI, SE., MSi</td>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+      <td>The research approach used in this study is a ...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Aplikasi Penilaian Kinerja dengan Metodologi C...</td>
-      <td>Luthfi Zahro</td>
-      <td>Moch. Kautsar Sophan, S.Kom., M.MT</td>
-      <td>r. Rachmad Hidayat, ST., MT</td>
-      <td>Setiap perusahaan mengharapkan adanya hubungan...</td>
+      <td>PENGARUH KUALITAS PELAYANAN TERHADAP KEPUASAN ...</td>
+      <td>Penulis : Annisa Lupita Rachmi Widhiastuti</td>
+      <td>Dosen Pembimbing I : Dr. H. Muh. Syarif. Drs E...</td>
+      <td>Dosen Pembimbing II :Yustina Chrismardani. S.S...</td>
+      <td>ABSTRAK\r\n\r\nTujuan penelitian ini adalah un...</td>
+      <td>ABSTRACT\r\nThe purpose of this study was to f...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>APLIKASI CITRA MOSAIC PANORAMIC MENGGUNAKAN ME...</td>
-      <td>Gendra Budiarti</td>
-      <td>Eza Rahmanita, ST, MT</td>
-      <td>eidya Koeshardianto, S.Si, MT</td>
-      <td>Sebuah citra banyak diterapkan dalam berbagai ...</td>
+      <td>PENGARUH PERILAKU KONSUMEN TERHADAP KEPUTUSAN ...</td>
+      <td>Penulis : Bany Azhar</td>
+      <td>Dosen Pembimbing I : dr.drs.Ec.H.Muh.Syarif,Msi</td>
+      <td>Dosen Pembimbing II :Hadi Purnomo, SE., MM</td>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>ABSTRACT\r\nThe purposes of this research (1) ...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>PENGARUH PERSEPSI NILAI TERHADAP KEPUASAN PELA...</td>
+      <td>Penulis : Hasan Basri</td>
+      <td>Dosen Pembimbing I : Dr. Nurita Andriani, Ir., MM</td>
+      <td>Dosen Pembimbing II :Yustina Chrismardani, S.S...</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>The purpose of this study was to find the effe...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>PENGARUH HARGA DAN KUALITAS PRODUK TERHADAP KE...</td>
+      <td>Penulis : Irnita Agustin Putri</td>
+      <td>Dosen Pembimbing I : Dr. Drs. Ec H. Muh Syarif...</td>
+      <td>Dosen Pembimbing II :Hadi Purnomo, S.E., MM</td>
+      <td>ABSTRAK \r\nTujuan penelitian ini adalah (1) U...</td>
+      <td>\tThe objective of this study are (1) To find ...</td>
     </tr>
   </tbody>
 </table>
@@ -561,7 +573,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(60, 5)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(12, 6)
 </pre></div>
 </div>
 </div>
@@ -569,7 +581,7 @@ title="Print to PDF"
 <p>Menghapus atribut judul, kolom Penulis, Dosbing_1, dan Dosbing_2</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Judul&#39;</span><span class="p">,</span><span class="s1">&#39;Penulis&#39;</span><span class="p">,</span> <span class="s1">&#39;Dosbing_1&#39;</span><span class="p">,</span> <span class="s1">&#39;Dosbing_2&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Judul&#39;</span><span class="p">,</span><span class="s1">&#39;Mahasiswa&#39;</span><span class="p">,</span> <span class="s1">&#39;Dosbing_1&#39;</span><span class="p">,</span> <span class="s1">&#39;Dosbing_2&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -600,48 +612,59 @@ title="Print to PDF"
     <tr style="text-align: right;">
       <th></th>
       <th>Abstrak_indo</th>
+      <th>Abstract_english</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Toko Batik Tulis Madura merupakan salah satu t...</td>
+      <td>ABSTRAK\r\n\tTujuan penelitian ini adalah mend...</td>
+      <td>ABSTRACT\r\nThe purpose of this study is to de...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>PT. Pos Indonesia (Persero) merupakan salah sa...</td>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+      <td>Object this research is consumer product of XL...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Kabupaten Pamekasan merupakan salah satu pusat...</td>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+      <td>An investment decision is always associated wi...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Pemilihan  supplier merupakan salah satu isu p...</td>
+      <td>Abstrak\r\n\r\nAththaariq, Pengaruh Kompetensi...</td>
+      <td>Abstract\r\n\r\nThis study is aimed to analyze...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>ABSTRAK\r\nData yang terdapat pada SMA Wachid ...</td>
+      <td>ABSTRAK\r\...</td>
+      <td>ABSTRACT...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Sumber daya manusia mutlak dibutuhkan untuk ke...</td>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>ABSTRACT\r\nThe objective of this research was...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Deteksi manusia merupakan  suatu aplikasi yang...</td>
+      <td>ABSTRAK \r\n\r\n\tTujuan penelitian ini adalah...</td>
+      <td>ABSTRACT\r\n\r\n         The purpose of this s...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Aplikasi klasifikasi status gizi balita ini di...</td>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+      <td>The research approach used in this study is a ...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Setiap perusahaan mengharapkan adanya hubungan...</td>
+      <td>ABSTRAK\r\n\r\nTujuan penelitian ini adalah un...</td>
+      <td>ABSTRACT\r\nThe purpose of this study was to f...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>Sebuah citra banyak diterapkan dalam berbagai ...</td>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>ABSTRACT\r\nThe purposes of this research (1) ...</td>
     </tr>
   </tbody>
 </table>
@@ -656,7 +679,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import package</span>
 <span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span> <span class="p">,</span> <span class="n">TfidfVectorizer</span>
 <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span>
 <span class="n">sw_indo</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;indonesian&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">punctuation</span><span class="p">)</span>
 </pre></div>
@@ -677,13 +700,12 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="extract-bag-of-words-bow">
-<h2>3. Extract Bag of Words (BoW)<a class="headerlink" href="#extract-bag-of-words-bow" title="Permalink to this headline">#</a></h2>
-<p>Bag of words (BOW) adalah teknik untuk mengekstrak fitur dari teks</p>
-<p>Dibawah ini proses untuk pemrosesan tokenisasi dan stopword.</p>
+<section id="tf-idf">
+<h2>3. TF-IDF<a class="headerlink" href="#tf-idf" title="Permalink to this headline">#</a></h2>
+<p>Data di atas adalah data yang sudah diproses menggunakan TF-IDF untuk menentukan Term Frequency tiap topik. TF-IDF (Term Frequency - Inverse Document Frequency) adalah algoritma praktis yang menggunakan frekuensi kata untuk menentukan seberapa relevan kata-kata itu dengan dokumen tertentu. Ini adalah pendekatan yang relatif sederhana namun intuitif untuk pembobotan kata, memungkinkannya bertindak sebagai titik awal yang bagus untuk berbagai tugas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bow</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">word_tokenize</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="n">sw_indo</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bow</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">word_tokenize</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="n">sw_indo</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">bow_matrix</span> <span class="o">=</span> <span class="n">bow</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Abstrak_indo</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -695,7 +717,66 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Hasil untuk proses diatas  diperoleh kata seperti kumpulan kata dibawah kemudian akan di proses untuk Topik modeling LSA</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bow_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">bow_matrix</span><span class="p">)</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bow_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">idf</span><span class="o">=</span><span class="n">bow</span><span class="o">.</span><span class="n">idf_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(12, 45)
+          0         1         2         3         4         5         6   \
+0   0.157056  0.185914  0.134013  0.185914  0.000000  0.000000  0.000000   
+1   0.000000  0.000000  0.127019  0.088106  0.264317  0.000000  0.000000   
+2   0.000000  0.000000  0.000000  0.000000  0.000000  0.522852  0.261426   
+3   0.097111  0.000000  0.165726  0.000000  0.000000  0.114955  0.114955   
+4   0.104047  0.000000  0.177564  0.000000  0.615829  0.000000  0.000000   
+5   0.081885  0.096931  0.069871  0.096931  0.000000  0.290794  0.096931   
+6   0.144754  0.171352  0.123516  0.000000  0.171352  0.000000  0.000000   
+7   0.000000  0.000000  0.087511  0.000000  0.000000  0.121403  0.121403   
+8   0.071675  0.084845  0.000000  0.000000  0.000000  0.254535  0.084845   
+9   0.079405  0.093996  0.135510  0.093996  0.187991  0.000000  0.000000   
+10  0.000000  0.000000  0.069165  0.095952  0.383807  0.000000  0.000000   
+11  0.052146  0.061728  0.044495  0.061728  0.308638  0.185183  0.061728   
+
+          7         8         9   ...        35        36        37        38  \
+0   0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.314112  0.203615   
+1   0.137392  0.206088  0.192989  ...  0.063509  0.096494  0.074430  0.096494   
+2   0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.000000  0.000000   
+3   0.179261  0.089630  0.125900  ...  0.082863  0.000000  0.097111  0.000000   
+4   0.096032  0.096032  0.000000  ...  0.088782  0.000000  0.000000  0.000000   
+5   0.075577  0.226732  0.318481  ...  0.069871  0.106160  0.081885  0.106160   
+6   0.133603  0.133603  0.000000  ...  0.247032  0.000000  0.000000  0.000000   
+7   0.094658  0.000000  0.000000  ...  0.175022  0.000000  0.102558  0.000000   
+8   0.000000  0.330768  0.278770  ...  0.061159  0.092923  0.000000  0.000000   
+9   0.073288  0.219865  0.000000  ...  0.067755  0.000000  0.158810  0.102945   
+10  0.074813  0.149627  0.000000  ...  0.138330  0.105087  0.081058  0.000000   
+11  0.048129  0.240645  0.135209  ...  0.088990  0.067605  0.052146  0.067605   
+
+          39        40        41        42        43        44  
+0   0.144957  0.144957  0.000000  0.000000  0.000000  0.000000  
+1   0.000000  0.000000  0.323357  0.161678  0.096494  0.190528  
+2   0.203834  0.203834  0.000000  0.000000  0.000000  0.000000  
+3   0.000000  0.000000  0.000000  0.000000  0.000000  0.497178  
+4   0.096032  0.096032  0.000000  0.000000  0.000000  0.177564  
+5   0.075577  0.075577  0.444684  0.177874  0.106160  0.279484  
+6   0.133603  0.133603  0.000000  0.000000  0.000000  0.370548  
+7   0.000000  0.000000  0.334171  0.111390  0.000000  0.262533  
+8   0.066154  0.066154  0.155695  0.077847  0.092923  0.733907  
+9   0.073288  0.073288  0.431216  0.086243  0.000000  0.338774  
+10  0.074813  0.074813  0.176076  0.088038  0.105087  0.276660  
+11  0.048129  0.048129  0.339819  0.113273  0.067605  0.444952  
+
+[12 rows x 45 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hasil untuk proses diatas  diperoleh kata seperti kumpulan kata dibawah kemudian akan di proses untuk model selanjutnya</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vocab</span> <span class="o">=</span> <span class="n">bow</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
@@ -704,299 +785,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;1&#39;, &#39;10&#39;, &#39;2&#39;, &#39;3&#39;, &#39;6&#39;, &#39;akurasi&#39;, &#39;algoritma&#39;, &#39;analisa&#39;, &#39;analysis&#39;, &#39;analytic&#39;, &#39;aplikasi&#39;, &#39;aspek&#39;, &#39;bahan&#39;, &#39;bangkalan&#39;, &#39;batik&#39;, &#39;bentuk&#39;, &#39;berbasis&#39;, &#39;berbeda&#39;, &#39;berdasarkan&#39;, &#39;berfungsi&#39;, &#39;bergerak&#39;, &#39;berkembang&#39;, &#39;bertujuan&#39;, &#39;bidang&#39;, &#39;bobot&#39;, &#39;cepat&#39;, &#39;citra&#39;, &#39;coba&#39;, &#39;coba aplikasi&#39;, &#39;coba sistem&#39;, &#39;daerah&#39;, &#39;dasar&#39;, &#39;data&#39;, &#39;data pelatihan&#39;, &#39;database&#39;, &#39;diambil&#39;, &#39;dibutuhkan&#39;, &#39;didalam&#39;, &#39;didapatkan&#39;, &#39;diharapkan&#39;, &#39;dimana&#39;, &#39;diperoleh&#39;, &#39;distance&#39;, &#39;ditentukan&#39;, &#39;diterapkan&#39;, &#39;efisien&#39;, &#39;ekstraksi&#39;, &#39;ekstraksi fitur&#39;, &#39;euclidean&#39;, &#39;euclidean distance&#39;, &#39;faktor&#39;, &#39;fitur&#39;, &#39;fungsi&#39;, &#39;fuzzy&#39;, &#39;gambar&#39;, &#39;game&#39;, &#39;hasil&#39;, &#39;hasil akurasi&#39;, &#39;hasil penelitian&#39;, &#39;hasil pengujian&#39;, &#39;hasil uji&#39;, &#39;indonesia&#39;, &#39;informasi&#39;, &#39;jaringan&#39;, &#39;jenis&#39;, &#39;kabupaten&#39;, &#39;kali&#39;, &#39;karakteristik&#39;, &#39;kebutuhan&#39;, &#39;kelas&#39;, &#39;kemampuan&#39;, &#39;kemiripan&#39;, &#39;keputusan&#39;, &#39;kinerja&#39;, &#39;klasifikasi&#39;, &#39;komputer&#39;, &#39;kriteria&#39;, &#39;kualitas&#39;, &#39;kunci&#39;, &#39;kunci sistem&#39;, &#39;learning&#39;, &#39;madura&#39;, &#39;manual&#39;, &#39;manusia&#39;, &#39;mata&#39;, &#39;matrix&#39;, &#39;media&#39;, &#39;memanfaatkan&#39;, &#39;membantu&#39;, &#39;memiliki&#39;, &#39;memprediksi&#39;, &#39;memudahkan&#39;, &#39;mencari&#39;, &#39;mendukung&#39;, &#39;menentukan&#39;, &#39;mengatasi&#39;, &#39;mengembangkan&#39;, &#39;menghasilkan&#39;, &#39;meningkatkan&#39;, &#39;metode&#39;, &#39;metode fuzzy&#39;, &#39;model&#39;, &#39;mse&#39;, &#39;mudah&#39;, &#39;network&#39;, &#39;nilai&#39;, &#39;objek&#39;, &#39;obyek&#39;, &#39;orang&#39;, &#39;otomatis&#39;, &#39;pamekasan&#39;, &#39;parameter&#39;, &#39;pelatihan&#39;, &#39;pelayanan&#39;, &#39;pembuatan&#39;, &#39;pemilihan&#39;, &#39;pencarian&#39;, &#39;pendeteksian&#39;, &#39;pendukung&#39;, &#39;pendukung keputusan&#39;, &#39;penelitian&#39;, &#39;penelitian metode&#39;, &#39;penentuan&#39;, &#39;penerapan&#39;, &#39;pengambilan&#39;, &#39;pengembangan&#39;, &#39;pengenalan&#39;, &#39;pengguna&#39;, &#39;penggunaan&#39;, &#39;pengujian&#39;, &#39;peramalan&#39;, &#39;perhitungan&#39;, &#39;perkembangan&#39;, &#39;permasalahan&#39;, &#39;perusahaan&#39;, &#39;pesat&#39;, &#39;pola&#39;, &#39;process&#39;, &#39;produk&#39;, &#39;program&#39;, &#39;proses&#39;, &#39;pt&#39;, &#39;rata-rata&#39;, &#39;sakit&#39;, &#39;salah&#39;, &#39;salah satunya&#39;, &#39;satunya&#39;, &#39;sesuai&#39;, &#39;sistem&#39;, &#39;sistem informasi&#39;, &#39;sistem pendukung&#39;, &#39;sistem pengenalan&#39;, &#39;skenario&#39;, &#39;solusi&#39;, &#39;studi&#39;, &#39;system&#39;, &#39;tahap&#39;, &#39;teknik&#39;, &#39;teknologi&#39;, &#39;terbaik&#39;, &#39;tingkat&#39;, &#39;tugas&#39;, &#39;tujuan&#39;, &#39;uji&#39;, &#39;uji coba&#39;, &#39;utama&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="topik-modelling-lsa">
-<h2>4. Topik Modelling LSA<a class="headerlink" href="#topik-modelling-lsa" title="Permalink to this headline">#</a></h2>
-<p>Menggunakan Librari SVD</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import package</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Pengurangan dimensi ini dapat dilakukan dengan menggunakan SVD terpotong. SVD, atau dekomposisi nilai tunggal, adalah teknik dalam aljabar linier yang memfaktorkan matriks M apa pun ke dalam produk dari 3 matriks terpisah: M=U<em>S</em>V, di mana S adalah matriks diagonal dari nilai tunggal M. Secara kritis, SVD terpotong mengurangi dimensi dengan hanya memilih nilai tunggal terbesar, dan hanya mempertahankan kolom t pertama U dan V. Dalam hal ini, t adalah hyperparameter yang dapat kita pilih dan sesuaikan untuk mencerminkan jumlah topik yang ingin kita temukan.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># LSA component</span>
-<span class="n">lsa</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">lsa_matrix</span> <span class="o">=</span> <span class="n">lsa</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">bow_matrix</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lsa_matrix</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 3.31692878e+00 -2.22474662e-01  1.05321067e+00 -4.31833999e-01
-   8.32223230e-01  3.88159397e-02  2.09965752e+00  9.14937294e-01
-  -2.34492630e-01 -3.03690220e+00]
- [ 3.01839968e+00 -1.81317891e+00  1.75307083e+00 -2.23135392e+00
-   2.06990649e-01  2.41735174e+00  3.80599698e-01 -2.02963452e+00
-  -1.97186483e+00 -1.08504668e+00]
- [ 3.02394422e+00  4.30185497e-01  1.99981748e+00 -1.40405469e+00
-   1.07222501e+00 -3.76228312e-01  8.13361458e-01  6.34775380e-01
-  -3.22139294e-01 -3.22419915e+00]
- [ 3.01112674e+00 -1.75868916e+00  1.17746167e+00 -2.21485892e+00
-  -1.36481079e+00  8.90695412e-01  9.63554246e-01 -1.50956378e+00
-   1.45961522e+00 -3.60715602e-01]
- [ 5.64104018e+00 -1.86978548e+00 -2.32939582e+00 -5.27772115e-01
-   2.14084093e+00  1.23794657e+00  8.77813304e+00  2.00979304e+00
-  -3.42522681e+00 -3.36631827e+00]
- [ 5.37371868e+00 -4.40648982e+00  2.16077936e+00 -4.58999078e+00
-  -3.78454752e+00  1.33880969e+00 -3.58712145e+00 -3.77242257e-01
-  -1.20136234e+00 -1.74308349e+00]
- [ 7.52170601e+00  3.24447239e+00  2.12771923e-01  9.49982524e-01
-  -1.20414974e+00  4.40259636e-01 -6.22640643e-01 -3.63762177e+00
-   2.21184516e+00  1.57917543e+00]
- [ 4.24365715e+00 -1.72773097e+00  6.97235865e-01 -4.71965769e-01
-   1.09407328e+00 -2.89842943e-01  3.02887816e+00 -1.86049375e+00
-  -8.08416162e-01  1.14685120e+00]
- [ 3.09077354e+00 -2.02649435e+00  9.35249830e-01 -2.94415912e+00
-  -7.69978353e-01  6.43171215e-01 -2.89833374e+00 -2.56171341e+00
-  -2.98467927e+00 -2.10026991e+00]
- [ 8.44855912e+00  7.83380004e+00  1.95120919e+00 -2.06710573e+00
-   1.23786018e+00 -4.97509703e-01 -9.03240623e-01 -2.56992992e+00
-   1.03348061e+00  3.35027344e+00]
- [ 1.49489902e+00 -1.55627391e+00  2.58787245e-01  9.13314543e-01
-   1.86124475e+00 -1.50772002e+00 -9.30545001e-01 -2.77231320e+00
-   1.35768577e+00  4.18154810e-01]
- [ 1.91717576e+00 -2.03086804e+00  7.74895453e+00  6.26384217e+00
-   1.99809781e+00  4.87144666e-01  1.61788891e-02  6.52770329e-01
-  -1.86340058e-02 -1.35890495e+00]
- [ 1.73195463e+00 -1.32120612e+00  4.58095561e+00  3.25189212e+00
-   1.11623879e+00  7.09167619e-01  1.11366151e+00 -1.25061859e+00
-   8.66283544e-01 -1.20933188e-01]
- [ 1.79878625e+00 -1.25444621e+00  3.55623524e+00  2.04964811e+00
-   5.92329597e-01  2.81023135e-01  3.22327968e-01  4.95331378e-01
-  -1.00055200e-01 -1.65690930e-01]
- [ 3.72944787e+00 -3.40029864e+00 -3.43167934e+00  9.47190341e-01
-   3.15480658e+00 -2.03662811e+00 -1.08239618e+00  5.31757795e-01
-  -5.19628730e-01 -6.46173026e-01]
- [ 5.89395290e+00 -1.92481982e+00  5.76179622e-01 -1.90208295e-01
-  -2.45713295e+00  2.40616618e+00  3.13987637e+00 -5.01647494e+00
-   5.35268195e+00 -1.86869001e+00]
- [ 1.56526147e+00 -2.03449916e+00 -3.13111647e+00 -1.49110304e+00
-   1.08129142e+01  1.23748424e+01 -3.96957254e+00  2.12150729e+00
-   2.57890978e+00  1.39670491e+00]
- [ 5.31057592e+00  2.96352706e+00  5.33327759e-01 -7.11976984e-01
-   2.44081075e-01  5.54440461e-01  1.14027757e+00 -1.05899531e+00
-   3.56151801e-01 -8.30347638e-02]
- [ 1.38192381e+00 -6.64190505e-01 -2.16916764e-01  7.31559579e-01
-  -2.69988332e-01 -1.74911739e-01 -1.53690719e-01 -2.35554216e+00
-   1.87440059e+00  1.58732996e-01]
- [ 2.64547421e+00 -1.47627829e+00  1.11492658e+00 -2.48781177e-01
-   4.26886453e-01 -4.88979476e-02  1.01080333e+00 -1.15627976e+00
-  -5.18353539e-01  2.31371313e+00]
- [ 1.54757962e+00 -1.01236423e+00  5.39492583e-01 -6.73794444e-03
-   5.00996124e-01 -2.75510566e-01 -4.81373508e-01 -9.77956389e-01
-   8.44035548e-01  1.89250873e-02]
- [ 7.07593251e+00 -1.01365953e+00 -3.03438085e+00  3.44639537e+00
-  -1.95367420e+00  1.17381809e+00 -2.42625675e-01  2.53515465e+00
-  -2.45721399e+00  1.14430511e-01]
- [ 4.21291657e+00 -3.00544668e+00 -1.83341494e+00 -1.21976793e-01
-   4.12716748e+00 -2.54611546e+00  1.08799415e+00 -1.04570012e+00
-   6.70836890e-01 -2.99448991e+00]
- [ 6.01921712e+00 -3.50809042e+00  2.01738721e+00 -2.09926564e+00
-  -1.02917929e+00  3.31166137e-01 -6.76088984e-02  6.45998859e-01
-  -3.01371845e+00  2.88417276e+00]
- [ 3.31814051e+00 -2.05233983e+00  1.11194272e+00 -1.73400198e+00
-  -9.33833144e-01  2.18509059e+00 -8.86866560e-01 -1.15707958e+00
-  -1.88005324e+00 -1.86468859e-01]
- [ 4.28812563e+00 -3.43601132e+00 -1.31191095e+00  1.91028452e-01
-   2.22363004e+00 -2.70083009e+00 -5.98179114e-01 -4.46307340e-01
-  -1.15537232e+00  1.44246004e+00]
- [ 5.18959767e+00 -3.53788533e+00 -9.56590366e-01 -8.88081070e-02
-   1.95039144e+00 -2.28716485e+00 -9.01176577e-02 -3.38520763e-01
-  -1.34962988e+00  2.06147588e+00]
- [ 4.91371662e+00 -3.29970874e+00 -8.00431925e-01 -8.22489588e-01
-   3.43529801e-01 -4.64682432e-01  1.65549731e+00  7.85612432e-01
-  -1.97138880e+00  3.15838473e+00]
- [ 3.62992090e+00 -2.96874954e+00  8.16635818e+00  6.83299334e+00
-   1.44474555e+00  8.01488459e-01 -6.75432778e-01  1.48927670e+00
-   1.43882219e-02 -4.03354878e-01]
- [ 9.63579560e+00  1.40397102e+00 -5.02729511e+00  5.35724511e+00
-  -1.82999472e+00  1.21355494e-01 -2.93585326e+00  4.25342464e-01
-  -1.40699438e+00  1.58023610e+00]
- [ 1.06235246e+01  6.27407628e+00 -3.77921395e-01 -7.67674086e-01
-   2.60799395e+00 -1.78513935e+00  4.84185114e-01  1.44353456e+00
-  -5.13597307e-01 -2.21848363e+00]
- [ 3.74964660e+00 -3.64932209e+00  1.78149636e+00 -2.77410527e+00
-  -1.27436458e+00 -1.09073013e+00 -1.79119319e+00  3.19344214e+00
-   8.49078912e-01  1.44118608e+00]
- [ 3.42348999e+00 -2.79918166e+00  1.46797247e+00 -3.51446572e+00
-   3.77059692e-02  1.33343638e+00 -2.40853229e+00 -3.49904574e+00
-  -3.61506570e+00 -3.11635990e+00]
- [ 6.59166853e+00  1.69993702e+00 -3.48234016e-02 -1.95112272e-01
-  -4.77351184e-01  8.75628341e-01  3.07135887e+00  1.40437510e+00
-  -6.97629100e-01  9.66302169e-02]
- [ 1.11125674e+01 -4.09312754e-01 -5.56617287e+00  6.13615395e+00
-  -4.23324493e+00  2.44554621e+00  1.72233114e-02 -3.08978735e-01
-  -1.37842070e-01 -1.44870924e+00]
- [ 3.67045610e+00 -1.37043033e+00  1.70616564e+00 -3.11315084e-01
-  -1.16263343e+00  7.68661664e-01  1.46491462e-01  4.99060649e-01
-  -8.94048302e-02  6.45834855e-01]
- [ 3.00145451e+00 -3.13400727e+00 -6.58925628e-01  7.65304182e-01
-   3.10900025e+00 -3.11262615e+00 -2.15266634e+00 -2.17544637e+00
-   4.64216810e-01  2.77491155e-01]
- [ 4.72057281e+00 -2.44555886e+00  2.61340678e-01 -1.98364635e+00
-   8.19214356e-01  1.56185014e+00  5.85759517e+00  2.28614067e-01
-  -1.60337620e+00  4.28569945e+00]
- [ 4.46128035e+00 -3.97749279e+00 -2.04658931e+00 -3.09628175e-01
-   4.74183840e+00 -5.00517696e+00 -1.15531726e+00 -1.00471043e+00
-   5.41930865e-01 -1.68520046e+00]
- [ 1.56084857e+01  1.29605813e+01  2.30737369e+00 -3.03973386e+00
-   2.94547186e+00 -1.52523065e+00 -3.35111009e-01  2.26819615e+00
-  -3.91028528e-01 -1.91691600e+00]
- [ 3.04736305e+00 -3.30616330e+00 -1.66423180e+00  1.85722047e-01
-   3.40585855e+00 -3.43035555e+00 -7.49955317e-01 -1.27315894e+00
-   1.38552621e+00 -6.89853568e-01]
- [ 5.98718513e+00 -3.85212431e+00  1.31006478e+00 -3.42296366e+00
-  -3.88732710e+00  1.63966008e+00 -2.17084804e+00 -1.41247975e+00
-  -5.19053664e-01 -1.24991066e+00]
- [ 3.36368179e+00 -3.50677619e+00  5.49527327e-01 -2.15471372e+00
-  -6.78235725e-01 -1.83029068e+00 -1.49540270e+00  3.84136985e+00
-   2.32647984e+00  1.92002617e+00]
- [ 3.21950645e+00 -1.11727101e+00 -1.93755013e-01  2.03560897e+00
-  -1.27910368e+00  6.32121921e-01 -7.01643908e-01 -3.43361724e+00
-   2.82419305e+00 -5.45596496e-02]
- [ 6.12048625e+00 -4.45108506e+00 -2.03567081e-01 -3.46056753e+00
-  -2.36376242e+00  3.46835419e-02  3.74353810e+00  3.82850497e+00
-   8.91414319e+00 -2.09926683e+00]
- [ 2.21300491e+00 -1.80703097e+00 -1.07163361e+00 -7.62523230e-01
-   1.35071279e+00  1.75184801e+00 -1.26440648e-01 -2.41777761e-01
-  -1.38072028e+00 -1.84929154e+00]
- [ 9.19467957e+00  8.12118821e+00  2.97598341e+00 -1.96651632e+00
-  -5.92009961e-02 -1.89988854e-01 -2.60291087e+00 -2.57608083e-01
-   1.17385523e+00  1.70719816e+00]
- [ 5.32161868e+00 -2.18565388e+00 -1.65290615e+00  1.76477370e+00
-  -2.30536870e+00  1.11405064e+00 -1.43385757e+00 -1.57666339e+00
-   1.39979385e+00  9.05797284e-01]
- [ 5.84499908e+00 -3.90292775e+00  9.14310474e-02 -1.70768951e+00
-  -1.06062396e+00 -7.35516357e-01 -6.98966200e-01  2.60218785e+00
-  -5.01279663e-02 -2.06909484e-01]
- [ 3.15091029e+00 -2.47145344e+00  7.83810049e+00  4.96895313e+00
-   1.43688616e+00  4.42685422e-01 -1.44550830e-01  1.33906329e+00
-  -4.78078583e-01 -5.26938027e-01]
- [ 2.29715749e+00 -1.85099758e+00  1.60110837e+00 -2.42433065e+00
-  -1.78939863e+00  1.65159076e+00 -1.30188002e+00 -2.32763378e+00
-  -1.59998025e+00 -2.41665411e+00]
- [ 3.15106954e+00 -1.66157124e+00 -1.34117607e+00  3.51248992e-01
-   5.57318019e-01  1.11948312e+00  1.22033261e+00  3.03294603e-01
-  -9.97321312e-01 -3.05617334e-01]
- [ 3.62678231e+00 -1.25167050e+00  6.53341836e-01 -5.92315687e-01
-   6.91812706e-01  6.33817523e-01  3.66827053e+00 -3.97029735e+00
-  -4.51922876e-01  3.25696279e+00]
- [ 1.88666370e+00 -1.02809592e+00  1.99127603e-01  2.30913088e-02
-   1.31277254e+00 -7.15136251e-01  5.98671411e-01 -2.69583534e+00
-   1.44183445e-01  1.72614705e+00]
- [ 2.10061012e+00 -1.00636673e+00  1.47270768e+00 -8.36870142e-01
-   6.25379841e-01  4.47364263e-01  3.30806563e+00 -2.04771616e+00
-  -6.34007298e-01  3.67006710e+00]
- [ 1.12229383e+01  3.34387195e-01 -3.81101453e+00  4.65215781e+00
-  -3.51596410e+00  1.62052259e+00 -4.83608666e-01  1.35008861e+00
-  -6.78458136e-01 -2.70691368e-01]
- [ 5.52734438e+00 -4.23078591e+00  1.71166227e+00 -2.28005930e+00
-  -1.40243063e+00 -1.73249997e+00 -1.99104539e+00  5.51479697e+00
-   3.53541108e-01  1.87375467e+00]
- [ 4.05866032e+00 -5.43410481e-01 -1.26780704e+00  2.25460103e+00
-  -1.03901194e+00  2.15765202e-01 -1.14659925e+00 -1.14952247e+00
-   6.93128129e-01 -1.54633202e-03]
- [ 4.36683503e+00 -3.30551503e+00 -1.68755823e+00  7.11170808e-01
-   4.02116148e+00 -4.15759115e+00 -1.29211012e+00 -2.19277954e+00
-   7.09392327e-01 -6.46882502e-01]
- [ 4.84323135e+00 -3.41582113e+00  5.49204773e-01 -1.18141115e+00
-  -3.18529814e-01 -1.45004301e+00 -1.60599322e+00  1.47230037e+00
-   6.89818702e-01  2.23418871e+00]]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Menampilkan lsa matrik di dokumen 1</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="n">lsa_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dokumen 1 :&quot;</span><span class="p">)</span>
-
-<span class="k">for</span>  <span class="n">i</span><span class="p">,</span><span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic &quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot; : &quot;</span><span class="p">,</span><span class="n">topic</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dokumen 1 :
-Topic  0  :  33.16928782929472
-Topic  1  :  -2.2247466210399542
-Topic  2  :  10.532106694048986
-Topic  3  :  -4.318339993393906
-Topic  4  :  8.32223230354201
-Topic  5  :  0.3881593974390384
-Topic  6  :  20.99657519443356
-Topic  7  :  9.149372937229225
-Topic  8  :  -2.3449262965208595
-Topic  9  :  -30.369021967079295
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sebelum reducing</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">bow_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>       <span class="c1"># like hidden layer</span>
-
-<span class="c1"># setelah reducing</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lsa_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>       <span class="c1"># weight / code</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lsa</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># fitur / topik</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(60, 166)
-(60, 10)
-(10, 166)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get topic</span>
-<span class="k">def</span> <span class="nf">get_topic</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[[</span><span class="n">vocab</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="mi">6</span><span class="p">:])</span> <span class="k">if</span> <span class="n">vocab</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()]</span>
-           <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">components_</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Hasil Topik LSA</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># LSA topic</span>
-<span class="n">get_topic</span><span class="p">(</span><span class="n">lsa</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;citra&#39;, &#39;metode&#39;, &#39;sistem&#39;, &#39;hasil&#39;, &#39;proses&#39;, &#39;data&#39;],
- [&#39;citra&#39;, &#39;batik&#39;, &#39;fitur&#39;, &#39;gambar&#39;, &#39;kemiripan&#39;, &#39;obyek&#39;],
- [&#39;game&#39;, &#39;metode&#39;, &#39;perusahaan&#39;, &#39;penelitian&#39;, &#39;hasil&#39;, &#39;madura&#39;],
- [&#39;game&#39;, &#39;pengenalan&#39;, &#39;proses&#39;, &#39;coba&#39;, &#39;uji&#39;],
- [&#39;jaringan&#39;, &#39;informasi&#39;, &#39;bangkalan&#39;, &#39;aplikasi&#39;, &#39;game&#39;, &#39;data&#39;],
- [&#39;jaringan&#39;, &#39;komputer&#39;, &#39;hasil&#39;, &#39;perusahaan&#39;, &#39;proses&#39;, &#39;pengenalan&#39;],
- [&#39;data&#39;, &#39;nilai&#39;, &#39;kebutuhan&#39;, &#39;teknik&#39;, &#39;algoritma&#39;, &#39;distance&#39;],
- [&#39;metode&#39;, &#39;keputusan&#39;, &#39;pendukung&#39;, &#39;kebutuhan&#39;],
- [&#39;teknik&#39;, &#39;proses&#39;, &#39;kebutuhan&#39;, &#39;pemilihan&#39;, &#39;jaringan&#39;, &#39;aplikasi&#39;],
- [&#39;nilai&#39;, &#39;metode&#39;, &#39;algoritma&#39;, &#39;mata&#39;, &#39;menentukan&#39;, &#39;jaringan&#39;]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;abstrak&#39;, &#39;abstrak tujuan&#39;, &#39;analisis&#39;, &#39;analisis data&#39;, &#39;bangkalan&#39;, &#39;berdasarkan&#39;, &#39;berdasarkan hasil&#39;, &#39;berganda&#39;, &#39;berpengaruh&#39;, &#39;berpengaruh signifikan&#39;, &#39;data&#39;, &#39;dominan&#39;, &#39;f&#39;, &#39;hasil&#39;, &#39;hasil penelitian&#39;, &#39;hipotesis&#39;, &#39;kuantitatif&#39;, &#39;kunci&#39;, &#39;linier&#39;, &#39;linier berganda&#39;, &#39;metode&#39;, &#39;nilai&#39;, &#39;parsial&#39;, &#39;pendekatan&#39;, &#39;penelitian&#39;, &#39;pengambilan&#39;, &#39;pengambilan sampel&#39;, &#39;pengaruh&#39;, &#39;produk&#39;, &#39;regresi&#39;, &#39;regresi linier&#39;, &#39;sampel&#39;, &#39;sampling&#39;, &#39;signifikan&#39;, &#39;signifikan variabel&#39;, &#39;simultan&#39;, &#39;t&#39;, &#39;teknik&#39;, &#39;teknik analisis&#39;, &#39;tujuan&#39;, &#39;tujuan penelitian&#39;, &#39;uji&#39;, &#39;uji f&#39;, &#39;uji t&#39;, &#39;variabel&#39;]
 </pre></div>
 </div>
 </div>
@@ -1031,12 +820,19 @@ Topic  9  :  -30.369021967079295
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Topik%20Modeling%20LSA%202.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Crawler.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Topik Modelling Using LSA pada data abstrak  ekonomi-manajemen</p>
+            <p class="prev-next-title">Crawling Abstrak Website PTA ekonomi-manajemen</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="k-means-clustering.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analisis K-means Clustering data abstrak PTA ekonomi-management</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

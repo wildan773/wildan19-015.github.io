@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Crawler &#8212; My sample book</title>
+    <title>Crawling Abstrak Website PTA ekonomi-manajemen &#8212; UAS PPW 190411100015 Moh. Wildan Fathoni</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Topik Modelling Using LSA" href="Topik%20Modeling%20LSA.html" />
-    <link rel="prev" title="Content with notebooks" href="notebooks.html" />
+    <link rel="next" title="Prepocessing Data" href="TFIDF.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -97,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">My sample book</h1>
+      <h1 class="site-logo" id="site-title">UAS PPW 190411100015 Moh. Wildan Fathoni</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -114,19 +114,24 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="markdown.html">
-   Markdown Files
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks.html">
-   Content with notebooks
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Crawler
+   Crawling Abstrak Website PTA ekonomi-manajemen
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="TFIDF.html">
+   Prepocessing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="k-means-clustering.html">
+   Analisis K-means Clustering data abstrak PTA ekonomi-management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Topik%20Modeling%20LSA%202.html">
+   Topik Modelling Using LSA pada data abstrak  ekonomi-manajemen
   </a>
  </li>
  <li class="toctree-l1">
@@ -359,7 +364,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Crawler</h1>
+                <h1>Crawling Abstrak Website PTA ekonomi-manajemen</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -389,17 +394,41 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="crawler">
-<h1>Crawler<a class="headerlink" href="#crawler" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="crawling-abstrak-website-pta-ekonomi-manajemen">
+<h1>Crawling Abstrak Website PTA ekonomi-manajemen<a class="headerlink" href="#crawling-abstrak-website-pta-ekonomi-manajemen" title="Permalink to this headline">#</a></h1>
 <p>Web crawler atau yang juga dikenal web spider, spider bot, web bot, crawler, adalah sebuah program software komputer yang digunakan oleh mesin pencari untuk mengindeks halaman web dan konten yang dimiliki setiap website.</p>
 <section id="proses-crawler-website-portal-akademik-utm">
 <h2>Proses Crawler Website Portal Akademik UTM<a class="headerlink" href="#proses-crawler-website-portal-akademik-utm" title="Permalink to this headline">#</a></h2>
+<p>Crawler akan masuk ke target yang telah ditentukan yaitu web <a class="reference external" href="https://pta.trunojoyo.ac.id/c_search/byprod/7/">https://pta.trunojoyo.ac.id/c_search/byprod/7/</a></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#import library 
+import scrapy
+
+class Url(scrapy.Spider):
+    name = &quot;url&quot;
+    start_urls = []
+    
+    # menetukan target url
+    def __init__(self):
+        url = &#39;https://pta.trunojoyo.ac.id/c_search/byprod/7/&#39;
+        for page in range(1,13):
+            self.start_urls.append(url + str(page))
+
+    def parse(self, response):
+        for page in range(1,6):
+            for url in response.css(&#39;#content_journal &gt; ul&#39;):
+                yield {
+                    &#39;url&#39; : url.css(&#39;li:nth-child(1) &gt; div:nth-child(3) &gt; a ::attr(href)&#39;).extract()
+                }
+</pre></div>
+</div>
 <p>Menggunakan library scrapy untuk proses menggambil data abstrak di website PTA.
 Menggunakan library json untuk mengambil File json
 Menyimpan kedalam file .csv</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import scrapy
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#Import Library
+import scrapy
 import json
 
+#Mengambil url dari file json
 class Pta(scrapy.Spider):
     name = &quot;pta&quot;
     file_json = open(&quot;url.json&quot;)
@@ -415,8 +444,8 @@ class Pta(scrapy.Spider):
             yield scrapy.Request(url = url, callback = self.parse)
 
     def parse(self, response):
-
-
+        
+        #memasukkan tiap atribut yang akan diambil kedalam colom
         for jurnal in response.css(&#39;#content_journal &gt; ul &gt; li&#39;):
             yield {
                 &#39;Judul&#39;:data_abstrak.css(&#39;div:nth-child(2) &gt; a::text&#39;).get(),
@@ -427,139 +456,69 @@ class Pta(scrapy.Spider):
             }
 </pre></div>
 </div>
-<p>Url di bawah disimpan di file json</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/060411100755&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100102&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/050411100662&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100014&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100041&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100012&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100170&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/050411100558&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100133&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100010&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100086&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100052&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/060411100818&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100125&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100029&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100007&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100126&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100109&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100083&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100092&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/040411100468&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/040411100476&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/040411100480&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100070&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100115&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100124&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100072&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100152&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100114&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100036&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100083&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100102&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/050411100538&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100011&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100158&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100002&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100062&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100155&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/050411100614&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/050411100566&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/050411100651&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100119&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100113&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100136&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100023&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100120&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100143&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100037&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100079&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100050&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100029&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/060411100824&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/060411100772&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100001&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/060411100801&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100078&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100081&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100042&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/070411100129&quot;</span><span class="p">]},</span>
-<span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://pta.trunojoyo.ac.id/welcome/detail/080411100003&quot;</span><span class="p">]}</span>
-<span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/060411100755&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100102&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/050411100662&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100014&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100041&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100012&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100170&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/050411100558&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100133&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100010&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100086&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100052&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/060411100818&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100125&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100029&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100007&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100126&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100109&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100083&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100092&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/040411100468&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/040411100476&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/040411100480&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100070&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100115&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100124&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100072&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100152&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100114&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100036&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100083&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100102&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/050411100538&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100011&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100158&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100002&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100062&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100155&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/050411100614&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/050411100566&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/050411100651&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100119&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100113&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100136&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100023&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100120&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100143&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100037&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100079&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100050&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100029&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/060411100824&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/060411100772&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100001&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/060411100801&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100078&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100081&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100042&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/070411100129&#39;]},
- {&#39;url&#39;: [&#39;https://pta.trunojoyo.ac.id/welcome/detail/080411100003&#39;]}]
-</pre></div>
-</div>
-</div>
-</div>
+<p>Url yang akan kita ambil data abstaknya  disimpan di file json seperti dibawah.</p>
+<p>[
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100070">https://pta.trunojoyo.ac.id/welcome/detail/080211100070</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100070">https://pta.trunojoyo.ac.id/welcome/detail/080211100070</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100070">https://pta.trunojoyo.ac.id/welcome/detail/080211100070</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100070">https://pta.trunojoyo.ac.id/welcome/detail/080211100070</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100013">https://pta.trunojoyo.ac.id/welcome/detail/090211100013</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100013">https://pta.trunojoyo.ac.id/welcome/detail/090211100013</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100013">https://pta.trunojoyo.ac.id/welcome/detail/090211100013</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100013">https://pta.trunojoyo.ac.id/welcome/detail/090211100013</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100013">https://pta.trunojoyo.ac.id/welcome/detail/090211100013</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100070">https://pta.trunojoyo.ac.id/welcome/detail/080211100070</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100025">https://pta.trunojoyo.ac.id/welcome/detail/090211100025</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100025">https://pta.trunojoyo.ac.id/welcome/detail/090211100025</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100025">https://pta.trunojoyo.ac.id/welcome/detail/090211100025</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100025">https://pta.trunojoyo.ac.id/welcome/detail/090211100025</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100025">https://pta.trunojoyo.ac.id/welcome/detail/090211100025</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100008">https://pta.trunojoyo.ac.id/welcome/detail/080211100008</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100008">https://pta.trunojoyo.ac.id/welcome/detail/080211100008</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100008">https://pta.trunojoyo.ac.id/welcome/detail/080211100008</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100008">https://pta.trunojoyo.ac.id/welcome/detail/080211100008</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100008">https://pta.trunojoyo.ac.id/welcome/detail/080211100008</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100119">https://pta.trunojoyo.ac.id/welcome/detail/080211100119</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100119">https://pta.trunojoyo.ac.id/welcome/detail/080211100119</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100119">https://pta.trunojoyo.ac.id/welcome/detail/080211100119</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100119">https://pta.trunojoyo.ac.id/welcome/detail/080211100119</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100119">https://pta.trunojoyo.ac.id/welcome/detail/080211100119</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100104">https://pta.trunojoyo.ac.id/welcome/detail/080211100104</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100104">https://pta.trunojoyo.ac.id/welcome/detail/080211100104</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100104">https://pta.trunojoyo.ac.id/welcome/detail/080211100104</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100104">https://pta.trunojoyo.ac.id/welcome/detail/080211100104</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100104">https://pta.trunojoyo.ac.id/welcome/detail/080211100104</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/070211100045">https://pta.trunojoyo.ac.id/welcome/detail/070211100045</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/070211100045">https://pta.trunojoyo.ac.id/welcome/detail/070211100045</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/070211100045">https://pta.trunojoyo.ac.id/welcome/detail/070211100045</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/070211100045">https://pta.trunojoyo.ac.id/welcome/detail/070211100045</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/070211100045">https://pta.trunojoyo.ac.id/welcome/detail/070211100045</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100100">https://pta.trunojoyo.ac.id/welcome/detail/080211100100</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100100">https://pta.trunojoyo.ac.id/welcome/detail/080211100100</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100100">https://pta.trunojoyo.ac.id/welcome/detail/080211100100</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100100">https://pta.trunojoyo.ac.id/welcome/detail/080211100100</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/080211100100">https://pta.trunojoyo.ac.id/welcome/detail/080211100100</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100090">https://pta.trunojoyo.ac.id/welcome/detail/090211100090</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100090">https://pta.trunojoyo.ac.id/welcome/detail/090211100090</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100090">https://pta.trunojoyo.ac.id/welcome/detail/090211100090</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100090">https://pta.trunojoyo.ac.id/welcome/detail/090211100090</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100090">https://pta.trunojoyo.ac.id/welcome/detail/090211100090</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100052">https://pta.trunojoyo.ac.id/welcome/detail/090211100052</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100052">https://pta.trunojoyo.ac.id/welcome/detail/090211100052</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100052">https://pta.trunojoyo.ac.id/welcome/detail/090211100052</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100052">https://pta.trunojoyo.ac.id/welcome/detail/090211100052</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100052">https://pta.trunojoyo.ac.id/welcome/detail/090211100052</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100065">https://pta.trunojoyo.ac.id/welcome/detail/090211100065</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100065">https://pta.trunojoyo.ac.id/welcome/detail/090211100065</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100065">https://pta.trunojoyo.ac.id/welcome/detail/090211100065</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100065">https://pta.trunojoyo.ac.id/welcome/detail/090211100065</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100065">https://pta.trunojoyo.ac.id/welcome/detail/090211100065</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100056">https://pta.trunojoyo.ac.id/welcome/detail/090211100056</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100056">https://pta.trunojoyo.ac.id/welcome/detail/090211100056</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100056">https://pta.trunojoyo.ac.id/welcome/detail/090211100056</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100056">https://pta.trunojoyo.ac.id/welcome/detail/090211100056</a>”]},
+{“url”: [”<a class="reference external" href="https://pta.trunojoyo.ac.id/welcome/detail/090211100056">https://pta.trunojoyo.ac.id/welcome/detail/090211100056</a>”]}
+]</p>
 </section>
 <section id="hasil-crawler">
 <h2>Hasil Crawler<a class="headerlink" href="#hasil-crawler" title="Permalink to this headline">#</a></h2>
@@ -567,7 +526,7 @@ class Pta(scrapy.Spider):
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data\data_abstrak.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data\data.csv&#39;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -592,92 +551,103 @@ class Pta(scrapy.Spider):
     <tr style="text-align: right;">
       <th></th>
       <th>Judul</th>
-      <th>Penulis</th>
+      <th>Mahasiswa</th>
       <th>Dosbing_1</th>
       <th>Dosbing_2</th>
       <th>Abstrak_indo</th>
+      <th>Abstract_english</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>APLIKASI DAN DESAIN MODEL DECISION AID PELANGG...</td>
-      <td>Ardiyanto Setiawan</td>
-      <td>Moch. Kautsar Sophan, S.Kom., M.MT.</td>
-      <td>eni Kustiyah Ningsih, S.Kom., M.Kom.</td>
-      <td>Toko Batik Tulis Madura merupakan salah satu t...</td>
+      <td>Analisis Inovasi Dan Keunggulan Bersaing \r\nD...</td>
+      <td>Penulis : Sandy Ardiansyah</td>
+      <td>Dosen Pembimbing I : Dr. Ir. Nurita Andriani, MM.</td>
+      <td>Dosen Pembimbing II :Suyono, S.E., M. S. M.</td>
+      <td>ABSTRAK\r\n\tTujuan penelitian ini adalah mend...</td>
+      <td>ABSTRACT\r\nThe purpose of this study is to de...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>ANALISA DATA ANTARAN POS EXPRESS MENGGUNAKAN\r...</td>
-      <td>siti murtasiyah warda</td>
-      <td>Bain Khusnul Khotimah.,S.T.,M.Kom</td>
-      <td>irli Irhamni, S.T., M.Kom.</td>
-      <td>PT. Pos Indonesia (Persero) merupakan salah sa...</td>
+      <td>Pengaruh Bauran Pemasaran Terhadap Keputusan P...</td>
+      <td>Penulis : Mahrus Saleh</td>
+      <td>Dosen Pembimbing I : Dr.H Pribanus Wantara, Dr...</td>
+      <td>Dosen Pembimbing II :Hadi Purnomo, SE., MM</td>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+      <td>Object this research is consumer product of XL...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Model Penjualan Produk Unggulan Batik Khas Pam...</td>
-      <td>Murni Rotifah</td>
-      <td>Moch. Kautsar Sophan, S.Kom, M.MT</td>
-      <td>ain Khusnul Khotimah, S.T., M.Kom</td>
-      <td>Kabupaten Pamekasan merupakan salah satu pusat...</td>
+      <td>ANALISIS PORTOFOLIO YANG OPTIMAL DI BEI DENGAN...</td>
+      <td>Penulis : Mira Dwiastuti</td>
+      <td>Dosen Pembimbing I : Hj Evaliati Amaniyah, S.E...</td>
+      <td>Dosen Pembimbing II :Echsan Gani, S.E, M.Si</td>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+      <td>An investment decision is always associated wi...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>PENERAPAN METODE ANALYTICAL HIERARCHY PROCESS ...</td>
-      <td>Helyatin</td>
-      <td>Bain Khusnul K, S.T.,M.Kom</td>
-      <td>ndharini Dwi C, S.Kom.,M.Kom</td>
-      <td>Pemilihan  supplier merupakan salah satu isu p...</td>
+      <td>PENGARUH KOMPETENSI DOSEN TERHADAP KINERJA DOS...</td>
+      <td>Penulis : Aththaariq</td>
+      <td>Dosen Pembimbing I : Dr.RM Moch Wispandono,.S....</td>
+      <td>Dosen Pembimbing II :Dr. Muhammad Alkirom Wild...</td>
+      <td>Abstrak\r\n\r\nAththaariq, Pengaruh Kompetensi...</td>
+      <td>Abstract\r\n\r\nThis study is aimed to analyze...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>PENGELOMPOKAN KUALITAS KELAS PADA SISWA MENGGU...</td>
-      <td>Hamiyah</td>
-      <td>Bain Khusnul K,ST.,M.Kom</td>
-      <td>irli Irhamni, ST, M. Kom</td>
-      <td>ABSTRAK\r\nData yang terdapat pada SMA Wachid ...</td>
+      <td>PENGARUH FAKTOR-FAKTOR PELATIHAN DAN PENGEMBAN...</td>
+      <td>Penulis : SATIYAH</td>
+      <td>Dosen Pembimbing I : Dra. Hj. S. Anugrahini Ir...</td>
+      <td>Dosen Pembimbing II :Helmi Buyung Aulia,S,ST.S...</td>
+      <td>ABSTRAK\r\...</td>
+      <td>ABSTRACT...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN KARYAWAN ...</td>
-      <td>Catur Ngesti Waluyo</td>
-      <td>Mula'ab,S.Si.,M.Kom</td>
-      <td>iza Alfita, S.T., M.T</td>
-      <td>Sumber daya manusia mutlak dibutuhkan untuk ke...</td>
+      <td>analisis faktor-faktor yang berpengaruh terhad...</td>
+      <td>Penulis : Jailani</td>
+      <td>Dosen Pembimbing I : Hj. Evaliati amaniyah, SE...</td>
+      <td>Dosen Pembimbing II :Purnamawati, SE., M.Si</td>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>ABSTRACT\r\nThe objective of this research was...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Deteksi Manusia Menggunakan Histogram of Orien...</td>
-      <td>R.A. Uluwiyah Nur Oktavianis</td>
-      <td>Dr. Indah Agustien, S.Kom., M.Kom</td>
-      <td>ri Kusumaningsih, S.T, M.T</td>
-      <td>Deteksi manusia merupakan  suatu aplikasi yang...</td>
+      <td>Pengaruh Kompensasi Terhadap Kinerja Karywan p...</td>
+      <td>Penulis : agustin pratiwi</td>
+      <td>Dosen Pembimbing I : Drs.Ec. Mudji Kuswinarno....</td>
+      <td>Dosen Pembimbing II :Faidal. S.E, MM.</td>
+      <td>ABSTRAK \r\n\r\n\tTujuan penelitian ini adalah...</td>
+      <td>ABSTRACT\r\n\r\n         The purpose of this s...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>KLASIFIKASI STATUS GIZI BALITA MENGGUNAKAN KOH...</td>
-      <td>Uhty Zunairoh</td>
-      <td>Bain Khusnul Khotimah, S.T., M.Kom.</td>
-      <td>eri Rachmad, S.T., M.T.</td>
-      <td>Aplikasi klasifikasi status gizi balita ini di...</td>
+      <td>PENGARUH STRUKTUR MODAL DAN LIKUIDITAS TERHADA...</td>
+      <td>Penulis : AHMAD ZAINI ALI</td>
+      <td>Dosen Pembimbing I : R. GATOT HERU PRANJOTO, S...</td>
+      <td>Dosen Pembimbing II :PURNAMAWATI, SE., MSi</td>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+      <td>The research approach used in this study is a ...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Aplikasi Penilaian Kinerja dengan Metodologi C...</td>
-      <td>Luthfi Zahro</td>
-      <td>Moch. Kautsar Sophan, S.Kom., M.MT</td>
-      <td>r. Rachmad Hidayat, ST., MT</td>
-      <td>Setiap perusahaan mengharapkan adanya hubungan...</td>
+      <td>PENGARUH KUALITAS PELAYANAN TERHADAP KEPUASAN ...</td>
+      <td>Penulis : Annisa Lupita Rachmi Widhiastuti</td>
+      <td>Dosen Pembimbing I : Dr. H. Muh. Syarif. Drs E...</td>
+      <td>Dosen Pembimbing II :Yustina Chrismardani. S.S...</td>
+      <td>ABSTRAK\r\n\r\nTujuan penelitian ini adalah un...</td>
+      <td>ABSTRACT\r\nThe purpose of this study was to f...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>APLIKASI CITRA MOSAIC PANORAMIC MENGGUNAKAN ME...</td>
-      <td>Gendra Budiarti</td>
-      <td>Eza Rahmanita, ST, MT</td>
-      <td>eidya Koeshardianto, S.Si, MT</td>
-      <td>Sebuah citra banyak diterapkan dalam berbagai ...</td>
+      <td>PENGARUH PERILAKU KONSUMEN TERHADAP KEPUTUSAN ...</td>
+      <td>Penulis : Bany Azhar</td>
+      <td>Dosen Pembimbing I : dr.drs.Ec.H.Muh.Syarif,Msi</td>
+      <td>Dosen Pembimbing II :Hadi Purnomo, SE., MM</td>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>ABSTRACT\r\nThe purposes of this research (1) ...</td>
     </tr>
   </tbody>
 </table>
@@ -713,17 +683,17 @@ class Pta(scrapy.Spider):
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="notebooks.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Content with notebooks</p>
+            <p class="prev-next-title">Welcome to your Jupyter Book</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Topik%20Modeling%20LSA.html" title="next page">
+    <a class='right-next' id="next-link" href="TFIDF.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Topik Modelling Using LSA</p>
+        <p class="prev-next-title">Prepocessing Data</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

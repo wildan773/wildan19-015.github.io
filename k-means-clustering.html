@@ -1,0 +1,1090 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Analisis K-means Clustering data abstrak PTA ekonomi-management &#8212; UAS PPW 190411100015 Moh. Wildan Fathoni</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Topik Modelling Using LSA pada data abstrak ekonomi-manajemen" href="Topik%20Modeling%20LSA%202.html" />
+    <link rel="prev" title="Prepocessing Data" href="TFIDF.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">UAS PPW 190411100015 Moh. Wildan Fathoni</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Crawler.html">
+   Crawling Abstrak Website PTA ekonomi-manajemen
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="TFIDF.html">
+   Prepocessing Data
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Analisis K-means Clustering data abstrak PTA ekonomi-management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Topik%20Modeling%20LSA%202.html">
+   Topik Modelling Using LSA pada data abstrak  ekonomi-manajemen
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Topik%20Modeling%20LSA.html">
+   Topik Modelling Using LSA
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/k-means-clustering.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fk-means-clustering.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/k-means-clustering.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Analisis K-means Clustering data abstrak PTA ekonomi-management
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-library">
+     1. Import library
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preprocessing">
+     2. Preprocessing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tfidf">
+   TFIDF
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stopword">
+     3. StopWord
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-mean-clustering">
+     4. K-mean Clustering
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Analisis K-means Clustering data abstrak PTA ekonomi-management</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Analisis K-means Clustering data abstrak PTA ekonomi-management
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-library">
+     1. Import library
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preprocessing">
+     2. Preprocessing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tfidf">
+   TFIDF
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stopword">
+     3. StopWord
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-mean-clustering">
+     4. K-mean Clustering
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-k-means-clustering-data-abstrak-pta-ekonomi-management">
+<h1>Analisis K-means Clustering data abstrak PTA ekonomi-management<a class="headerlink" href="#analisis-k-means-clustering-data-abstrak-pta-ekonomi-management" title="Permalink to this headline">#</a></h1>
+<p>Ada 3 langkah utama dalam algoritma K-Means (dikenal juga sebagai algoritma Lloyd):</p>
+<ol class="simple">
+<li><p>Pisahkan sampel menjadi kelompok awal dengan menggunakan titik benih. Sampel terdekat dengan titik benih ini akan membuat kluster awal.</p></li>
+<li><p>Hitung jarak sampel ke titik pusat kelompok (sentroid) dan tetapkan sampel terdekat ke kluster mereka.</p></li>
+<li><p>Langkah ketiga adalah menghitung sentroid cluster yang baru dibuat (diperbarui).</p></li>
+<li><p>Kemudian ulangi langkah 2 dan 3 sampai algoritma bertemu.</p></li>
+</ol>
+<section id="import-library">
+<h2>1. Import library<a class="headerlink" href="#import-library" title="Permalink to this headline">#</a></h2>
+<p>Import librari yang dibutuhkan seperti librari dibawah untuk menampilkan data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Memanggil dan Menampilkan data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data\data.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Judul</th>
+      <th>Mahasiswa</th>
+      <th>Dosbing_1</th>
+      <th>Dosbing_2</th>
+      <th>Abstrak_indo</th>
+      <th>Abstract_english</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Analisis Inovasi Dan Keunggulan Bersaing \r\nD...</td>
+      <td>Penulis : Sandy Ardiansyah</td>
+      <td>Dosen Pembimbing I : Dr. Ir. Nurita Andriani, MM.</td>
+      <td>Dosen Pembimbing II :Suyono, S.E., M. S. M.</td>
+      <td>ABSTRAK\r\n\tTujuan penelitian ini adalah mend...</td>
+      <td>ABSTRACT\r\nThe purpose of this study is to de...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Pengaruh Bauran Pemasaran Terhadap Keputusan P...</td>
+      <td>Penulis : Mahrus Saleh</td>
+      <td>Dosen Pembimbing I : Dr.H Pribanus Wantara, Dr...</td>
+      <td>Dosen Pembimbing II :Hadi Purnomo, SE., MM</td>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+      <td>Object this research is consumer product of XL...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ANALISIS PORTOFOLIO YANG OPTIMAL DI BEI DENGAN...</td>
+      <td>Penulis : Mira Dwiastuti</td>
+      <td>Dosen Pembimbing I : Hj Evaliati Amaniyah, S.E...</td>
+      <td>Dosen Pembimbing II :Echsan Gani, S.E, M.Si</td>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+      <td>An investment decision is always associated wi...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PENGARUH KOMPETENSI DOSEN TERHADAP KINERJA DOS...</td>
+      <td>Penulis : Aththaariq</td>
+      <td>Dosen Pembimbing I : Dr.RM Moch Wispandono,.S....</td>
+      <td>Dosen Pembimbing II :Dr. Muhammad Alkirom Wild...</td>
+      <td>Abstrak\r\n\r\nAththaariq, Pengaruh Kompetensi...</td>
+      <td>Abstract\r\n\r\nThis study is aimed to analyze...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>PENGARUH FAKTOR-FAKTOR PELATIHAN DAN PENGEMBAN...</td>
+      <td>Penulis : SATIYAH</td>
+      <td>Dosen Pembimbing I : Dra. Hj. S. Anugrahini Ir...</td>
+      <td>Dosen Pembimbing II :Helmi Buyung Aulia,S,ST.S...</td>
+      <td>ABSTRAK\r\...</td>
+      <td>ABSTRACT...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>analisis faktor-faktor yang berpengaruh terhad...</td>
+      <td>Penulis : Jailani</td>
+      <td>Dosen Pembimbing I : Hj. Evaliati amaniyah, SE...</td>
+      <td>Dosen Pembimbing II :Purnamawati, SE., M.Si</td>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>ABSTRACT\r\nThe objective of this research was...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Pengaruh Kompensasi Terhadap Kinerja Karywan p...</td>
+      <td>Penulis : agustin pratiwi</td>
+      <td>Dosen Pembimbing I : Drs.Ec. Mudji Kuswinarno....</td>
+      <td>Dosen Pembimbing II :Faidal. S.E, MM.</td>
+      <td>ABSTRAK \r\n\r\n\tTujuan penelitian ini adalah...</td>
+      <td>ABSTRACT\r\n\r\n         The purpose of this s...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>PENGARUH STRUKTUR MODAL DAN LIKUIDITAS TERHADA...</td>
+      <td>Penulis : AHMAD ZAINI ALI</td>
+      <td>Dosen Pembimbing I : R. GATOT HERU PRANJOTO, S...</td>
+      <td>Dosen Pembimbing II :PURNAMAWATI, SE., MSi</td>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+      <td>The research approach used in this study is a ...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>PENGARUH KUALITAS PELAYANAN TERHADAP KEPUASAN ...</td>
+      <td>Penulis : Annisa Lupita Rachmi Widhiastuti</td>
+      <td>Dosen Pembimbing I : Dr. H. Muh. Syarif. Drs E...</td>
+      <td>Dosen Pembimbing II :Yustina Chrismardani. S.S...</td>
+      <td>ABSTRAK\r\n\r\nTujuan penelitian ini adalah un...</td>
+      <td>ABSTRACT\r\nThe purpose of this study was to f...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>PENGARUH PERILAKU KONSUMEN TERHADAP KEPUTUSAN ...</td>
+      <td>Penulis : Bany Azhar</td>
+      <td>Dosen Pembimbing I : dr.drs.Ec.H.Muh.Syarif,Msi</td>
+      <td>Dosen Pembimbing II :Hadi Purnomo, SE., MM</td>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>ABSTRACT\r\nThe purposes of this research (1) ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="preprocessing">
+<h2>2. Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h2>
+<p>hapus atribut kolong yang tidak di butuhkan seperti ‘Abstract_english’,’Mahasiswa’, ‘Dosbing_1’, ‘Dosbing_2</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Judul&quot;</span><span class="p">,</span><span class="s1">&#39;Abstract_english&#39;</span><span class="p">,</span><span class="s1">&#39;Mahasiswa&#39;</span><span class="p">,</span> <span class="s1">&#39;Dosbing_1&#39;</span><span class="p">,</span> <span class="s1">&#39;Dosbing_2&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Abstrak_indo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ABSTRAK\r\n\tTujuan penelitian ini adalah mend...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abstrak\r\n\r\nAththaariq, Pengaruh Kompetensi...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABSTRAK\r\...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ABSTRAK \r\n\r\n\tTujuan penelitian ini adalah...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ABSTRAK\r\n\r\nTujuan penelitian ini adalah un...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tfidf">
+<h1>TFIDF<a class="headerlink" href="#tfidf" title="Permalink to this headline">#</a></h1>
+<section id="stopword">
+<h2>3. StopWord<a class="headerlink" href="#stopword" title="Permalink to this headline">#</a></h2>
+<p>Proses tokenisasi dan stopword berbahasa indonesia dan juga penghilngan karakter punctuation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import package</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span> <span class="p">,</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span>
+<span class="n">sw_indo</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;indonesian&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">punctuation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>proses TF idf menggunakan TfidfVectorizer</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bow</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">word_tokenize</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="n">sw_indo</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">bow_matrix</span> <span class="o">=</span> <span class="n">bow</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Abstrak_indo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\ProgramData\Anaconda3\lib\site-packages\sklearn\feature_extraction\text.py:388: UserWarning: Your stop_words may be inconsistent with your preprocessing. Tokenizing the stop words generated tokens [&#39;``&#39;] not in stop_words.
+  warnings.warn(&#39;Your stop_words may be inconsistent with &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>menampilkan matriks</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bow_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">bow_matrix</span><span class="p">)</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bow_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">idf</span><span class="o">=</span><span class="n">bow</span><span class="o">.</span><span class="n">idf_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(12, 45)
+          0         1         2         3         4         5         6   \
+0   0.157056  0.185914  0.134013  0.185914  0.000000  0.000000  0.000000   
+1   0.000000  0.000000  0.127019  0.088106  0.264317  0.000000  0.000000   
+2   0.000000  0.000000  0.000000  0.000000  0.000000  0.522852  0.261426   
+3   0.097111  0.000000  0.165726  0.000000  0.000000  0.114955  0.114955   
+4   0.104047  0.000000  0.177564  0.000000  0.615829  0.000000  0.000000   
+5   0.081885  0.096931  0.069871  0.096931  0.000000  0.290794  0.096931   
+6   0.144754  0.171352  0.123516  0.000000  0.171352  0.000000  0.000000   
+7   0.000000  0.000000  0.087511  0.000000  0.000000  0.121403  0.121403   
+8   0.071675  0.084845  0.000000  0.000000  0.000000  0.254535  0.084845   
+9   0.079405  0.093996  0.135510  0.093996  0.187991  0.000000  0.000000   
+10  0.000000  0.000000  0.069165  0.095952  0.383807  0.000000  0.000000   
+11  0.052146  0.061728  0.044495  0.061728  0.308638  0.185183  0.061728   
+
+          7         8         9   ...        35        36        37        38  \
+0   0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.314112  0.203615   
+1   0.137392  0.206088  0.192989  ...  0.063509  0.096494  0.074430  0.096494   
+2   0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.000000  0.000000   
+3   0.179261  0.089630  0.125900  ...  0.082863  0.000000  0.097111  0.000000   
+4   0.096032  0.096032  0.000000  ...  0.088782  0.000000  0.000000  0.000000   
+5   0.075577  0.226732  0.318481  ...  0.069871  0.106160  0.081885  0.106160   
+6   0.133603  0.133603  0.000000  ...  0.247032  0.000000  0.000000  0.000000   
+7   0.094658  0.000000  0.000000  ...  0.175022  0.000000  0.102558  0.000000   
+8   0.000000  0.330768  0.278770  ...  0.061159  0.092923  0.000000  0.000000   
+9   0.073288  0.219865  0.000000  ...  0.067755  0.000000  0.158810  0.102945   
+10  0.074813  0.149627  0.000000  ...  0.138330  0.105087  0.081058  0.000000   
+11  0.048129  0.240645  0.135209  ...  0.088990  0.067605  0.052146  0.067605   
+
+          39        40        41        42        43        44  
+0   0.144957  0.144957  0.000000  0.000000  0.000000  0.000000  
+1   0.000000  0.000000  0.323357  0.161678  0.096494  0.190528  
+2   0.203834  0.203834  0.000000  0.000000  0.000000  0.000000  
+3   0.000000  0.000000  0.000000  0.000000  0.000000  0.497178  
+4   0.096032  0.096032  0.000000  0.000000  0.000000  0.177564  
+5   0.075577  0.075577  0.444684  0.177874  0.106160  0.279484  
+6   0.133603  0.133603  0.000000  0.000000  0.000000  0.370548  
+7   0.000000  0.000000  0.334171  0.111390  0.000000  0.262533  
+8   0.066154  0.066154  0.155695  0.077847  0.092923  0.733907  
+9   0.073288  0.073288  0.431216  0.086243  0.000000  0.338774  
+10  0.074813  0.074813  0.176076  0.088038  0.105087  0.276660  
+11  0.048129  0.048129  0.339819  0.113273  0.067605  0.444952  
+
+[12 rows x 45 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="k-mean-clustering">
+<h2>4. K-mean Clustering<a class="headerlink" href="#k-mean-clustering" title="Permalink to this headline">#</a></h2>
+<p>Metode ini melihat persentase varians yang dijelaskan sebagai fungsi dari jumlah cluster: Seseorang harus memilih sejumlah cluster sehingga menambahkan cluster lain tidak memberikan pemodelan data yang jauh lebih baik.</p>
+<p>Mengimport librari KMeans</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membagi klaster sebnyak 4 cluster</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Memsukkan Data yang sudah dilakukan term frekuensi</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">bow_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KMeans(n_clusters=4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>meghitung matriks kmeans menggunakan cluster_centers_</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.08351755, 0.05123944, 0.11086337, 0.        , 0.15743628,
+        0.0981786 , 0.06424059, 0.10071081, 0.13000681, 0.08093391,
+        0.06328434, 0.08969187, 0.03784752, 0.12878426, 0.04630662,
+        0.08318421, 0.02659239, 0.08876619, 0.07481679, 0.07481679,
+        0.11117742, 0.19154453, 0.1161017 , 0.06715762, 0.2664219 ,
+        0.02517998, 0.02517998, 0.26462214, 0.        , 0.06888471,
+        0.07481679, 0.05606411, 0.08857589, 0.22896922, 0.08129799,
+        0.13097161, 0.01858464, 0.03993388, 0.        , 0.05915785,
+        0.05915785, 0.09797308, 0.03784752, 0.01858464, 0.40834615],
+       [0.04268724, 0.05053087, 0.08921194, 0.08734235, 0.22895054,
+        0.09519531, 0.03173177, 0.08183999, 0.20859127, 0.12933577,
+        0.11499495, 0.05469892, 0.12542122, 0.08282161, 0.07679208,
+        0.06169843, 0.07635944, 0.03642423, 0.07869896, 0.07869896,
+        0.08193746, 0.07544079, 0.08454437, 0.08121953, 0.2518485 ,
+        0.07635944, 0.07635944, 0.11307509, 0.39745466, 0.08867059,
+        0.07869896, 0.09284204, 0.0639709 , 0.12452018, 0.03281982,
+        0.08569112, 0.07506933, 0.0896657 , 0.07464085, 0.05436159,
+        0.05436159, 0.34303032, 0.12542122, 0.07506933, 0.30607968],
+       [0.        , 0.        , 0.        , 0.        , 0.        ,
+        0.52285228, 0.26142614, 0.        , 0.        , 0.        ,
+        0.        , 0.        , 0.        , 0.34878883, 0.18844414,
+        0.        , 0.        , 0.18844414, 0.        , 0.        ,
+        0.23986483, 0.22084642, 0.        , 0.        , 0.48440977,
+        0.        , 0.        , 0.        , 0.        , 0.        ,
+        0.        , 0.20383386, 0.        , 0.        , 0.        ,
+        0.        , 0.        , 0.        , 0.        , 0.20383386,
+        0.20383386, 0.        , 0.        , 0.        , 0.        ],
+       [0.15705578, 0.18591421, 0.13401278, 0.18591421, 0.        ,
+        0.        , 0.        , 0.        , 0.        , 0.        ,
+        0.68232322, 0.        , 0.        , 0.12402126, 0.13401278,
+        0.        , 0.        , 0.13401278, 0.        , 0.        ,
+        0.        , 0.        , 0.        , 0.1705808 , 0.34448988,
+        0.        , 0.        , 0.        , 0.20361533, 0.        ,
+        0.        , 0.        , 0.        , 0.        , 0.        ,
+        0.        , 0.        , 0.31411157, 0.20361533, 0.14495724,
+        0.14495724, 0.        , 0.        , 0.        , 0.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Melabeli data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3, 1, 2, 0, 0, 1, 0, 0, 0, 1, 1, 1])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
+<span class="n">dict_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 5, 1: 5, 2: 1, 3: 1}
+</pre></div>
+</div>
+</div>
+</div>
+<p>memasukkan Label kedalam kollom cluster</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Inersia adalah jumlah kesalahan kuadrat untuk setiap cluster.
+Oleh karena itu semakin kecil inersia semakin padat cluster (lebih dekat bersama semua titik)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.775730814504131
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span><span class="o">.</span><span class="n">score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;bound method KMeans.score of KMeans(n_clusters=4)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Abstrak_indo</th>
+      <th>cluster</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ABSTRAK\r\n\tTujuan penelitian ini adalah mend...</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abstrak\r\n\r\nAththaariq, Pengaruh Kompetensi...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABSTRAK\r\...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ABSTRAK \r\n\r\n\tTujuan penelitian ini adalah...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ABSTRAK\r\n\r\nTujuan penelitian ini adalah un...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>ABSTRAK\r\nTujuan penelitian ini adalah untuk ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>ABSTRAK \r\nTujuan penelitian ini adalah (1) U...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="TFIDF.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Prepocessing Data</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Topik%20Modeling%20LSA%202.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Topik Modelling Using LSA pada data abstrak  ekonomi-manajemen</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
